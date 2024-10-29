@@ -20,7 +20,10 @@ class BowlingGame:
             raise BowlingError
 
     def calculate_score(self) -> int:
-        pass
+        total_score = 0
+        for frame in self.frames:
+            total_score += frame.first_throw + frame.second_throw
+        return total_score
 
     def set_first_bonus_throw(self, bonus_throw: int) -> None:
         pass
