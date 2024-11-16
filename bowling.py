@@ -17,4 +17,15 @@ class BowlingGame:
         return self.frames[i]
     
     def calculate_score(self) -> int:
-        return sum(frame.first_throw + frame.second_throw for frame in self.frames)
+        total_score = 0
+        for i in range(len(self.frames)):
+            frame = self.frames[i]
+            frame_score = frame.first_throw + frame.second_throw
+
+            if frame.is_spare():
+                if i + 1 < len(self.frames):
+                    frame_score += self.frames[i + 1].first_throw
+
+            total_score += frame_score
+
+        return total_score
