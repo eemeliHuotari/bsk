@@ -21,8 +21,16 @@ class BowlingGame:
         for i in range(len(self.frames)):
             frame = self.frames[i]
             frame_score = frame.first_throw + frame.second_throw
-
-            if frame.is_spare():
+            if frame.is_strike():
+                frame_score = 10
+                if i + 1 < len(self.frames):
+                    next_frame = self.frames[i + 1]
+                    frame_score += next_frame.first_throw
+                    if next_frame.is_strike() and i + 2 < len(self.frames):
+                        frame_score += self.frames[i + 2].first_throw
+                    else:
+                        frame_score += next_frame.second_throw
+            elif frame.is_spare():
                 if i + 1 < len(self.frames):
                     frame_score += self.frames[i + 1].first_throw
 
