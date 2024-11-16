@@ -185,3 +185,12 @@ class TestBowlingGame(unittest.TestCase):
         game.set_second_bonus_throw(2)
         expected_score = (10 + 0) + (3 + 6) + (7 + 2) + (3 + 6) + (4 + 4) + (5 + 3) + (3 + 3) + (4 + 5) + (9 + 1)
         self.assertEqual(game.calculate_score(), expected_score)
+        
+    def test_perfect_game(self):
+        game = BowlingGame()
+        for _ in range(9):
+            game.add_frame(Frame(10, 0))
+        game.add_frame(Frame(10, 0))
+        game.set_first_bonus_throw(10)
+        game.set_second_bonus_throw(10)
+        self.assertEqual(game.calculate_score(), 300)
