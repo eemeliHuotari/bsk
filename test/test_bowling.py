@@ -90,3 +90,20 @@ class TestBowlingGame(unittest.TestCase):
         game.add_frame(Frame(3, 2))
         expected_score = 20 + 13 + 5
         self.assertEqual(game.calculate_score(), expected_score)
+        
+    def test_multiple_strikes(self):
+        game = BowlingGame()
+        game.add_frame(Frame(10, 0))
+        game.add_frame(Frame(10, 0))
+        game.add_frame(Frame(7, 2))
+        expected_score = 27 + 19 + 9
+        self.assertEqual(game.calculate_score(), expected_score)
+
+    def test_multiple_strikes_with_spare(self):
+        game = BowlingGame()
+        game.add_frame(Frame(10, 0))
+        game.add_frame(Frame(10, 0))
+        game.add_frame(Frame(7, 3))
+        game.add_frame(Frame(8, 1))
+        expected_score = 27 + 20 + 18 + 9
+        self.assertEqual(game.calculate_score(), expected_score)
