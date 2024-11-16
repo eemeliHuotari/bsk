@@ -3,30 +3,15 @@ from frame import Frame
 
 
 class BowlingGame:
-
     def __init__(self):
-        self.frames = []
-        self.max_frames = 10
+        self.frames = []  # Store up to 10 frames
+
     def add_frame(self, frame: Frame) -> None:
-        if len(self.frames) < self.max_frames:
-            self.frames.append(frame)
-        else:
-            raise BowlingError
+        if len(self.frames) >= 10:
+            raise BowlingError("Cannot add more than 10 frames to a game.")
+        self.frames.append(frame)
 
     def get_frame_at(self, i: int) -> Frame:
-        if 0 <= i < len(self.frames):
-            return self.frames[i]
-        else:
-            raise BowlingError
-
-    def calculate_score(self) -> int:
-        total_score = 0
-        for frame in self.frames:
-            total_score += frame.first_throw + frame.second_throw
-        return total_score
-
-    def set_first_bonus_throw(self, bonus_throw: int) -> None:
-        pass
-
-    def set_second_bonus_throw(self, bonus_throw: int) -> None:
-        pass
+        if i < 0 or i >= len(self.frames):
+            raise BowlingError("Frame index out of range.")
+        return self.frames[i]
