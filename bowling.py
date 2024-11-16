@@ -4,7 +4,7 @@ from frame import Frame
 
 class BowlingGame:
     def __init__(self):
-        self.frames = []  # Store up to 10 frames
+        self.frames = []
 
     def add_frame(self, frame: Frame) -> None:
         if len(self.frames) >= 10:
@@ -15,3 +15,6 @@ class BowlingGame:
         if i < 0 or i >= len(self.frames):
             raise BowlingError("Frame index out of range.")
         return self.frames[i]
+    
+    def calculate_score(self) -> int:
+        return sum(frame.first_throw + frame.second_throw for frame in self.frames)
