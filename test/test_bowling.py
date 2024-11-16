@@ -74,3 +74,19 @@ class TestBowlingGame(unittest.TestCase):
         game.add_frame(Frame(10, 0))
         expected_score = (9 * 9) + 10
         self.assertEqual(game.calculate_score(), expected_score)
+        
+    def test_strike_followed_by_spare(self):
+        game = BowlingGame()
+        game.add_frame(Frame(10, 0))
+        game.add_frame(Frame(4, 6))
+        game.add_frame(Frame(7, 2))
+        expected_score = 20 + 17 + 9
+        self.assertEqual(game.calculate_score(), expected_score)
+
+    def test_strike_spare_and_normal_frame(self):
+        game = BowlingGame()
+        game.add_frame(Frame(10, 0))
+        game.add_frame(Frame(6, 4))
+        game.add_frame(Frame(3, 2))
+        expected_score = 20 + 13 + 5
+        self.assertEqual(game.calculate_score(), expected_score)
